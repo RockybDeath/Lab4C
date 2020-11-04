@@ -1,4 +1,5 @@
 #include <malloc.h>
+#include <stdio.h>
 #include "list.h"
 
 list* list_create(int x){
@@ -41,12 +42,13 @@ long list_sum(list* pointer){
         sum+= pointer->val;
         pointer = pointer->next;
     }
+    return sum;
 }
 
 list* list_node_at(size_t index, list super_list){
     size_t i;
-    list* pointer = super_list.next;
-    for(i=0; i < index; i++){
+    list* pointer = &super_list;
+    for(i=1; i < index; i++){
         if(pointer->next == NULL) return NULL;
         pointer = pointer->next;
     }

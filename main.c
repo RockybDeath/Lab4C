@@ -13,12 +13,13 @@ list* readNumbers(){
 }
 
 void printList(list* pointer){
-    size_t index = 0;
+    size_t index = 1;
     while(pointer->next != NULL){
         printf("Value %zu:%d\n", index, pointer->val);
         index++;
         pointer = pointer->next;
     }
+    printf("Value %zu:%d\n", index, pointer->val);
 }
 
 void printValue(list* pointer){
@@ -26,7 +27,7 @@ void printValue(list* pointer){
     puts("Write index of element");
     int console = scanf("%zu", &index);
     while(1){
-        while(console != EOF && console != 0){
+        while(console != EOF){
             printf("Value for your index %zu: %d\n", index, list_get(index, pointer));
             puts("Write index of element");
             console = scanf("%zu", &index);
@@ -37,8 +38,11 @@ void printValue(list* pointer){
 
 int main(){
     list* pointer = readNumbers();
-    printList(pointer);
-    printf("Sum of elements:%li\n",list_sum(pointer));
-    printValue(pointer);
-    list_free(pointer);
+    if(pointer == NULL) puts("Empty list");
+    else{
+        printList(pointer);
+        printf("Sum of elements:%li\n",list_sum(pointer));
+        printValue(pointer);
+        list_free(pointer);
+    }
 }
